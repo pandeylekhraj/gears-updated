@@ -1,0 +1,26 @@
+// default unit of length: mm
+// keep the size of Neutrino Alley (NA) similar to that of a detector
+:volu concrete BOX 20*m 10*m 20*m G4_CONCRETE
+
+:volu core BOX 5*m 2.5*m 5*m G4_CONCRETE
+:volu NA BOX 10*m 2.5*m 10*m G4_AIR
+:volu Detector BOX 2.5*m 2.5*m 1 G4_AIR
+
+:rotm r000 0 0 0
+:rotm ry90 0 90 0
+
+// copy number uniquely identifies volumes that have the same name
+:place NA 10 concrete r000  0 0 0
+:place core -1 NA r000 0 0 0
+:place Detector 1 NA r000 7.5*m 0 0
+:place Detector 2 NA r000 7.5*m 0 0.5*m
+:place Detector 3 NA ry90 5*m 0 7.5*m
+:place Detector 4 NA ry90 0 0 7.5*m
+:place Detector 5 NA ry90 -5*m 0 7.5*m
+
+
+:color concrete 0.2 0.5 0.6
+:color core 0.2 0.5 0.6
+:color Detector 0 0 0
+:vis NA OFF
+

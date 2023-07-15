@@ -1,0 +1,21 @@
+:volu world BOX 5*m 5*m 5*m G4_Galactic
+:volu concrete BOX 5*m 5*m 0.5*m G4_CONCRETE
+:volu water BOX 5*m 5*m 20*cm G4_WATER
+:volu lead BOX 5*m 5*m 10*cm G4_Pb
+:volu HDPE BOX 5*m 5*m 7*cm G4_POLYETHYLENE
+:volu detector BOX 5*m 5*m 1 G4_Galactic
+
+:rotm r000 0 0 0
+
+:place concrete -1 world r000 0 0 2*m
+:place water -2 world r000 0 0 2.8*m
+:place lead -3 world r000 0 0 3.2*m
+:place HDPE -4 world r000 0 0 3.4*m
+:place detector 1 world r000 0 0 3.5*m
+
+:color concrete 0.2 0.5 0.6
+:color water 0.2 0.4 0.5
+:color lead 0.5 0.4 0.2
+:color HDPE 0.2 0.8 0.2
+:color detector 0.8 0.8 0.8
+:vis world OFF

@@ -1,0 +1,58 @@
+services:
+  gears: # docker-compose run --rm gears
+    command: /usr/bin/bash # launch a command line to run compiled gears
+    image: physino/gears # shorter than physino/geant4:gears
+    profiles: [ "gears" ] # https://docs.docker.com/compose/profiles
+    platform: linux/amd64 # pre-compiled geant4 is not available for arm64
+    volumes:
+      - ".:/root/COH-CryoCsI-1"
+      - "../gears:/root/gears"
+    working_dir: /root/COH-CryoCsI-1
+
+  root: # docker-compose run root
+    command: /usr/bin/bash # launch a command line to run root
+    image: physino/root # https://hub.docker.com/r/physino/root
+    profiles: [ "root" ]
+    environment:
+      - DISPLAY=host.docker.internal:0.0
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - .:/root/COH-CryoCsI-1
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    working_dir: /root/COH-CryoCsI-1
+
+  # launch a Jupyter notebook service to analyze data with ROOT or Python
+  notebook: # docker-compose up
+    command: /usr/bin/root --notebook --allow-root --no-browser --ip=0.0.0.0
+    image: physino/root:notebook
+    ports: [ "8888:8888" ] # only exposed with `up`, not 'run`
+    volumes: [".:/root/COH-CryoCsI-1"]
+
+  heprapp: # docker-compose run heprapp
+    command: /usr/bin/hv # launch HepRApp
+    image: physino/heprapp # https://hub.docker.com/r/physino/heprapp
+    profiles: [ "heprapp" ]
+    environment:
+      - DISPLAY=host.docker.internal:0.0
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - .:/root/COH-CryoCsI-1
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    sysctls:
+      - net.ipv4.tcp_keepalive_intvl=60
+      - net.ipv4.tcp_keepalive_probes=5
+      - net.ipv4.tcp_keepalive_time=300
+
+  x3d: # docker-compose up x3d
+    # according to https://stackoverflow.com/a/16488110
+    # a browser cannot access g4_??.x3d embed in file://g4_??.html
+    # a simple web server is needed to avoid change browser settings
+    # -u: don't buffer output (https://stackoverflow.com/a/63195558)
+    # --cgi: enable CGI (https://stackoverflow.com/a/63195558)
+    command: python3 -u -m http.server --cgi
+    image: physino/heprapp
+    profiles: [ "x3d" ]
+    ports: [ "8000:8000" ] # only exposed with `up`, not 'run`
+    volumes: [".:/root/COH-CryoCsI-1"]

@@ -1,0 +1,49 @@
+# width of tunnel is defined in the 2nd line of both this and tg file
+/control/alias width 2.5
+/control/alias length 6 
+/control/divide halfWidth {width} 2
+/control/subtract x {length} {halfWidth}
+/control/subtract z {width} {length}
+/control/verbose 2
+
+/geometry/source tunnel.tg
+/run/initialize
+
+/vis/ASCIITree/verbose 13
+/vis/drawTree
+
+/geometry/test/run
+
+/vis/open HepRepFile
+/vis/drawVolume
+
+/vis/scene/add/axes 0 0 0 3 m
+/vis/scene/add/trajectories
+/vis/scene/endOfEventAction accumulate 100
+/vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/drawByParticleID-0/set neutron orange
+
+/gps/particle neutron
+/gps/energy 1 MeV
+/gps/pos/type Plane
+/gps/pos/shape Square
+/gps/pos/halfx {halfWidth} m
+/gps/pos/halfy {halfWidth} m
+/gps/pos/centre {x} 0 {z} m
+/gps/ang/type cos
+
+/run/beamOn 100
+
+/vis/disable
+/analysis/setFileName n1MeVinTunnel.root
+/run/verbose 2
+/run/printProgress 1000
+/run/beamOn 100000
+
+/gps/energy 10 MeV
+/analysis/setFileName n10MeVinTunnel.root
+/run/beamOn 100000
+
+/gps/energy 100 MeV
+/analysis/setFileName n100MeVinTunnel.root
+/run/beamOn 100000

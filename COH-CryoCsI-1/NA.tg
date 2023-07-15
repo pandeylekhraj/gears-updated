@@ -1,0 +1,15 @@
+#include shield.tg
+:volu concrete BOX 5*m 5*m 10*m G4_CONCRETE
+:volu NA BOX 1.5*m 1.15*m 10*m G4_AIR
+:volu exhaust TUBE 508-6.35 508 10*m G4_STAINLESS-STEEL
+
+// rotate around x axis by 90 degree
+:rotm rx90 90 0 0
+
+:place NA -60 concrete r000 0 0 0
+:place water -59 NA rx90 -1000 -400 0
+:place exhaust -61 NA r000 960 -530 0
+
+:color NA 0.8 0.8 0.8
+:color exhaust 0.6 0.6 0.6
+

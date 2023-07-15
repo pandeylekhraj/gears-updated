@@ -1,0 +1,20 @@
+// default unit of length: mm
+// keep the size of Neutrino Alley (NA) similar to that of a detector
+:volu NA BOX 5000 5000 2000 G4_AIR
+
+:volu tunnel BOX 2500 2500 1000 G4_CONCRETE
+:volu Air(S) BOX 2500 2500 100 G4_AIR
+//:volu Air(S) BOX 2500 2500 10 G4_AIR
+
+:rotm r000 0 0 0
+:rotm rz90 0 0 90
+
+// copy number uniquely identifies volumes that have the same name
+:place tunnel 1 NA r000  0 0 0
+//:place Air 1 tunnel r000 0 0 0
+:place Air(S) 1 NA r000 0 0 -2010
+:color tunnel 0.2 0.5 0.6
+:color Air(S) 0 0 0
+//:color Air(S) 0 0 0
+:vis NA OFF
+

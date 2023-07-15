@@ -1,0 +1,82 @@
+// paramaters (default unit for length: mm)
+// https://www.cryomech.com/wp-content/uploads/2021/03/CH60425-09MAR218.pdf
+// L1: length of 1st stage, R1: radius of 1st stage
+// L2: length of 2nd stage, R2: radius of 2nd stage
+// Li: length of IR shield, Ri: radius of IR shield
+// Lc: length of crystal, Rc: radius of crystal
+// L:  length of chamber, R: radius of chamber
+// T1, T2: thickness of 1st and 2nd stage
+:p L1 195.7
+:p R1 64.75
+:p L2 227.6
+:p R2 47
+:p Lc 70
+:p Rc 38.9
+:p Li $L2+$Lc+10
+:p Ri 59.3
+:p L  $L1+$Li+10
+:p R  86.5
+:p T1 6.58
+:p T2 5.64
+
+// PT425 internal components
+:volu chamber TUBE 0 $R $L/2+2 G4_STAINLESS-STEEL
+:volu vacuum TUBE 0 $R-2 $L/2 G4_Galactic
+:volu shield TUBE 0 $Ri ($Li+1)/2 G4_Cu
+:volu inside TUBE 0 $Ri-1 $Li/2 G4_Galactic
+:volu stage1 TUBE 0 $R1 $T1/2 G4_Cu
+:volu stage2 TUBE 0 $R2 $T2/2 G4_Cu
+
+:volu PT1 TUBE 21.4 22.4 ($L1-$T1)/2 G4_STAINLESS-STEEL
+:volu PT2upper TUBE 12 13 ($L1-$T1)/2 G4_STAINLESS-STEEL
+:volu PT2lower TUBE 12 13 ($L2-$T2)/2 G4_STAINLESS-STEEL
+
+:volu regenerator1 TUBE 32 33 ($L1-$T1)/2 G4_STAINLESS-STEEL
+:volu regenerator2 TUBE 15.9 16.9 ($L2-$T2)/2 G4_STAINLESS-STEEL
+
+// crystal + SiPM
+:volu CsI(S) TUBE 0 $Rc $Lc/2 G4_CESIUM_IODIDE
+:volu wrap TUBE 0 $Rc+0.2 $Lc/2 G4_TEFLON
+:volu SiPM TUBE 0 40 0.25 G4_Si
+:volu PCB TUBE 0 $R2 1.57/2 G4_POLYETHYLENE
+
+:rotm r000 0 0 0
+
+:place vacuum -40 chamber r000 0 0 0
+// stage 1
+:place regenerator1 -41 vacuum r000 -22 -18.8 ($L-$L1+$T1)/2
+:place PT2upper -42 vacuum r000 -7 30 ($L-$L1+$T1)/2
+:place PT1 -43 vacuum r000 35.19 6.5 ($L-$L1+$T1)/2
+
+:place stage1 -44 vacuum r000 0 0 $L/2-$L1+$T1/2
+// stage 2
+:place shield -45 vacuum r000 0 0 $L/2-$L1-$Li/2-1
+:place inside -46 shield r000 0 0 0
+:place regenerator2 -47 inside r000 -22 -18.8 ($Li-$L2+$T2)/2
+:place PT2lower -48 inside r000 -7 30 ($Li-$L2+$T2)/2
+:place stage2 -49 inside r000 0 0 $Li/2-$L2+$T2/2
+// detector
+:place wrap -50 inside r000 0 0 $Li/2-$L2-$Lc/2
+:place CsI(S) 1 wrap r000 0 0 0
+:place SiPM -51 inside r000 0 0 $Li/2-$L2-$Lc-0.25
+:place PCB -52 inside r000 0 0 $Li/2-$L2-$Lc-0.5-1.57/2
+
+// stainless steel: gray
+:color chamber 0.6 0.6 0.6
+:color vacuum 0.6 0.6 0.6
+:color PT1 0.6 0.6 0.6
+:color PT2upper 0.6 0.6 0.6
+:color PT2lower 0.6 0.6 0.6
+:color regenerator1 0.6 0.6 0.6
+:color regenerator2 0.6 0.6 0.6
+// copper: gold
+:color stage1 1 0.7 0.1
+:color stage2 1 0.7 0.1
+:color shield 1 0.7 0.1
+:color inside 1 0.7 0.1
+
+:color CsI(S) 0.5 1 0.8
+:color wrap 0.5 0.5 0.5
+:color SiPM 0.5 0.8 1
+:color PCB 0.5 0.7 0.4
+

@@ -1,0 +1,36 @@
+/control/verbose 2
+/geometry/source shield.tg
+
+/physics_lists/select QGSP_BERT_EMV
+/physics_lists/factory/addRadioactiveDecay
+
+/run/initialize
+
+/gps/particle ion
+/gps/ion 19 40
+/gps/energy 0
+/gps/pos/type Volume
+/gps/pos/shape Cylinder
+/gps/pos/radius 38.9 mm
+/gps/pos/halfz 40 mm
+/gps/pos/centre 0 0 -318 mm
+/gps/pos/confine CsI(S)
+
+/vis/open HepRepFile
+/vis/drawVolume
+/vis/scene/add/axes
+/vis/scene/add/trajectories
+/vis/scene/endOfEventAction accumulate 50
+/vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/drawByParticleID-0/set anti_nu_e blue
+
+/tracking/verbose 2
+/run/beamOn 20
+
+/tracking/verbose 0
+/vis/disable
+/analysis/setFileName K40.root
+/run/verbose 2
+/run/printProgress 1000
+/run/beamOn 10000
+

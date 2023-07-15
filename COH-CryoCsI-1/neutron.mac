@@ -1,0 +1,40 @@
+/control/verbose 2
+/geometry/source detector.tg
+
+/run/initialize
+
+/vis/ASCIITree/verbose 13
+/vis/drawTree
+
+/geometry/test/run
+
+/vis/open HepRepFile
+/vis/drawVolume
+
+/gps/pos/centre 0 0 64 cm
+
+/gps/particle neutron
+/gps/energy 1 MeV
+/gps/direction 0 0 -1
+
+/vis/scene/add/axes
+/vis/scene/add/trajectories
+/vis/scene/endOfEventAction accumulate 200
+
+/vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/drawByParticleID-0/set neutron yellow
+
+/tracking/verbose 2
+/run/beamOn 10
+
+/vis/disable
+/tracking/verbose 0
+/run/verbose 2
+/analysis/setFileName n1MeV.root
+/run/printProgress 1000
+/run/beamOn 10000
+
+/gps/energy 400 MeV
+/analysis/setFileName n400MeV.root
+/run/beamOn 10000
+

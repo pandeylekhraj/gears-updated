@@ -1,0 +1,17 @@
+// default unit of length: mm
+// keep the size of Neutrino Alley (NA) similar to that of a detector
+:volu NA BOX 1000 1000 2000 G4_AIR
+
+:volu lead  BOX 500 500 3 G4_POLYETHYLENE
+//:volu pannel(S) BOX 500 500 25 G4_PLASTIC_SC_VINYLTOLUENE
+:volu pannel(S) BOX 500 500 20 G4_AIR
+
+:rotm r000 0 0 0
+:rotm rz90 0 0 90
+
+:place lead 1 NA r000 0 0 800
+:place pannel(S) 1 NA r000 0 0 826
+
+:color lead 0.2 0.5 0.6
+:color pannel(S) 0.2 0.5 0.6
+:vis NA OFF

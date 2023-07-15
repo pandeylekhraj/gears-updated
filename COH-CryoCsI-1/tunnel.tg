@@ -1,0 +1,28 @@
+// width of tunnel
+:p w 2.5*m
+:p l 6*m
+
+:volu concrete BOX 20*m 10*m 20*m G4_CONCRETE
+:volu tunnel BOX $l $w/2 $l G4_AIR
+:volu core BOX $l-$w $w/2 $l-$w G4_CONCRETE
+// default unit of length: mm
+:volu detector BOX $w/2 $w/2 1 G4_AIR
+
+// no rotate at all
+:rotm r000 0 0 0
+// rotate around y axis by 90 degree
+:rotm ry90 0 90 0
+
+:place tunnel -2 concrete r000 0 0 0
+:place core -1 tunnel r000 0 0 0
+
+:place detector 1 tunnel r000 $l-$w/2 0 0
+:place detector 2 tunnel r000 $l-$w/2 0 $l-$w
+:place detector 3 tunnel ry90 $l-$w 0 $l-$w/2
+:place detector 4 tunnel ry90 0 0 $l-$w/2
+:place detector 5 tunnel ry90 $w-$l 0 $l-$w/2
+
+:color core 0.7 0.9 0.9
+:color tunnel 0.7 0.9 0.9
+:color detector 0.9 0.2 0.2
+

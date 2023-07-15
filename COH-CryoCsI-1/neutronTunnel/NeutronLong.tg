@@ -1,0 +1,20 @@
+// default unit of length: mm
+// keep the size of Neutrino Alley (NA) similar to that of a detector
+:volu NA BOX 5000 5000 5000 G4_Galactic
+
+:volu tunnelCon BOX 5000 5000 500 G4_CONCRETE
+:volu detector BOX 5000 5000 1000 G4_Galactic
+//:volu Air(S) BOX 2500 2500 1000 G4_AIR
+
+:rotm r000 0 0 0
+//:rotm rz90 0 0 90
+
+// copy number uniquely identifies volumes that have the same name
+:place tunnelCon 10 NA r000  0 0 2000
+:place detector 1 NA r000 0 0 1000
+
+:color tunnelCon 0.2 0.5 0.6
+:color detector 0.8 0.8 0.8
+//:color Air(S) 0 0 0
+:vis NA OFF
+

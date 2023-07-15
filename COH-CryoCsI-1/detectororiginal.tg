@@ -1,0 +1,21 @@
+// default unit of length: mm
+// keep the size of Neutrino Alley (NA) similar to that of a detector
+:volu NA BOX 1000 1000 2000 G4_AIR
+
+:volu TopPanel(S)  BOX 500 500 25.6 G4_PLASTIC_SC_VINYLTOLUENE
+:volu SidePanel(S) BOX 25.6 500-25.6 800 G4_PLASTIC_SC_VINYLTOLUENE
+
+:rotm r000 0 0 0
+:rotm rz90 0 0 90
+
+:place TopPanel(S) 1 NA r000 0 0 800+25.6
+// copy number uniquely identifies volumes that have the same name
+:place SidePanel(S) 2 NA r000  500-25.6  25.6 0
+:place SidePanel(S) 4 NA r000 -500+25.6 -25.6 0
+:place SidePanel(S) 3 NA rz90 -25.6  500-25.6 0
+:place SidePanel(S) 5 NA rz90  25.6 -500+25.6 0
+
+:color TopPanel(S) 0.2 0.5 0.6
+:color SidePanel(S) 0.2 0.5 0.6
+:vis NA OFF
+

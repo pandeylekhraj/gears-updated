@@ -1,0 +1,41 @@
+/control/verbose 2
+/geometry/source NeutronLong.tg
+
+/run/initialize
+
+/vis/ASCIITree/verbose 13
+/vis/drawTree
+
+/geometry/test/run
+
+/vis/open HepRepFile
+/vis/drawVolume
+
+/gps/pos/type Plane
+/gps/pos/shape Square
+/gps/pos/halfx 2.5 m
+/gps/pos/halfy 2.5 m
+/gps/pos/centre 0 0 10 m
+/gps/ang/type cos
+
+#/gps/particle gamma
+/gps/particle neutron
+/gps/energy 400000 keV
+#/gps/energy 2614 keV
+/gps/direction 0 0 -1
+/vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/drawByParticleID-0/set neutron yellow
+
+/vis/scene/add/axes
+/vis/scene/add/trajectories
+/vis/scene/endOfEventAction accumulate 200
+
+/run/beamOn 100
+
+/vis/disable
+/analysis/setFileName neutronConcrete400Mev.root
+/run/verbose 2
+/run/printProgress 1000
+/run/beamOn 10000
+
+

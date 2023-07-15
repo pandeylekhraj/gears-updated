@@ -1,0 +1,75 @@
+# container
+*.sif
+
+# webpage related
+_site
+*jekyll*
+*.lock
+
+# visualization files
+.DAWN*
+*.heprep
+*.eps
+*.prim
+*.jpeg
+*.jpg
+*.png
+*.pdf
+user.properties
+*.gif
+*.zip
+*.wrl
+*.jar
+*.x3d
+*.html
+*.htm
+*.gdml
+
+# Executables
+gears
+gears.exe
+ghdf5
+gcsv
+gxml
+
+# backup files
+\#*
+.swp
+*~
+
+# Data
+*.root
+*.json
+*.csv
+*.h5
+*.he5
+*.hdf
+*.hdf5
+*log
+
+# alternative output format
+ghdf5.cc
+gcsv.cc
+gxml.cc
+
+# file system
+.nfs*
+
+# windows
+.vs
+out
+build
+Release
+*.pdb
+
+# macOS
+.DS_Store
+.java-version
+
+# CMake
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
+
+# jupyter notebook
+*ipynb_checkpoints
